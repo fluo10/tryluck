@@ -4,6 +4,20 @@ A CLI and MCP server for luck-based randomization: coin flips, dice rolls, tarot
 
 ## Installation
 
+**Linux / macOS:**
+
+```sh
+curl -fsSL https://raw.githubusercontent.com/fluo10/tryluck/main/install.sh | sh
+```
+
+**Windows (PowerShell):**
+
+```powershell
+irm https://raw.githubusercontent.com/fluo10/tryluck/main/install.ps1 | iex
+```
+
+**From source:**
+
 ```sh
 cargo install --path .
 ```

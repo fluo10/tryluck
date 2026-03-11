@@ -3,7 +3,10 @@ name = "tryluck"
 version = "0.1.0"
 edition = "2024"
 license = "MIT OR Apache-2.0"
+description = "Try your luck with AI: randomized tarot, dice, and coin results for creative storytelling and TRPG adventures via CLI and MCP."
 repository = "https://github.com/fluo10/tryluck"
+keywords = ["mcp", "cli", "random", "tarot", "dice"]
+categories = ["command-line-utilities", "games"]
 
 [dependencies]
 clap = { version = "4", features = ["derive"] }

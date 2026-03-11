@@ -1,6 +1,6 @@
 # tryluck
 
-A CLI and MCP server for luck-based randomization: coin flips, dice rolls, tarot draws, and more. Designed for use with AI assistants.
+Try your luck with AI: randomized tarot, dice, and coin results for creative storytelling and TRPG adventures via CLI and MCP.
 
 ## Installation
 
@@ -56,6 +56,8 @@ tryluck mcp
 | `coin` | Flip a coin one or more times. Accepts `count` (number of flips) and `boolean` (return `true`/`false` instead of `heads`/`tails`). Returns a JSON array of strings. |
 
 ## Planned Features
+
+> **Note:** Only `coin` is available in the current release. The following features are under development.
 
 - `tryluck dice` — dice rolls with notation like `1d6`, `2d10`
 - `tryluck tarot` — random tarot card draws

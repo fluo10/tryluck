@@ -1,4 +1,4 @@
-use rand::Rng;
+use rand::RngExt as _;
 
 pub fn run(count: u32, boolean: bool) {
     for _ in 0..count {

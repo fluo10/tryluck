@@ -1,4 +1,4 @@
-use rand::Rng;
+use rand::RngExt as _;
 use rmcp::{
     ServerHandler, ServiceExt,
     handler::server::{router::tool::ToolRouter, wrapper::Parameters},

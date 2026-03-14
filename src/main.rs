@@ -14,6 +14,9 @@ struct Cli {
 enum Command {
     /// Flip a coin and print heads or tails
     Coin {
+        /// Output as JSON array of {result} objects
+        #[arg(long)]
+        json: bool,
         /// Output true/false instead of heads/tails
         #[arg(long)]
         boolean: bool,
@@ -40,7 +43,7 @@ async fn main() -> Result<()> {
     let cli = Cli::parse();
 
     match cli.command {
-        Command::Coin { boolean, count } => commands::coin::run(count.unwrap_or(1), boolean),
+        Command::Coin { json, boolean, count } => commands::coin::run(count.unwrap_or(1), boolean, json),
         Command::Tarot { json, case, count } => {
             use commands::tarot::Case;
             let case = case.unwrap_or(if json { Case::Snake } else { Case::Proper });

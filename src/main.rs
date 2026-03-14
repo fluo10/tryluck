@@ -68,13 +68,15 @@ async fn main() -> Result<()> {
         }
         Command::Dice { spec, sides, modifier, sum, json } => {
             let (mut count, mut parsed_sides, mut parsed_modifier) = (1u32, 6u32, 0i32);
+            let mut notation_used = false;
             if let Some(spec) = spec {
+                notation_used = spec.to_ascii_lowercase().contains('d');
                 let (c, s, m) = commands::dice::parse_spec(&spec);
                 if let Some(c) = c { count = c; }
                 if let Some(s) = s { parsed_sides = s; }
                 if let Some(m) = m { parsed_modifier = m; }
             }
-            commands::dice::run(count, sides.unwrap_or(parsed_sides), modifier.unwrap_or(parsed_modifier), sum, json)
+            commands::dice::run(count, sides.unwrap_or(parsed_sides), modifier.unwrap_or(parsed_modifier), sum || notation_used, json)
         }
         Command::Mcp => commands::mcp::run().await?,
     }

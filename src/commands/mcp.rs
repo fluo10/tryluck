@@ -64,8 +64,9 @@ impl TryluckServer {
     #[tool(description = "Roll dice one or more times. Returns a JSON array of roll results normally, or an object {\"rolls\": [...], \"total\": N} when sum=true or modifier is non-zero. Supports dice notation (e.g. \"3d10\", \"d6+2\") or explicit count/sides/modifier parameters.")]
     fn dice(&self, Parameters(p): Parameters<DiceParams>) -> Result<String, String> {
         let (mut count, mut sides, mut modifier) = (1u32, 6u32, 0i32);
-        if let Some(notation) = p.notation {
-            let (c, s, m) = dice::parse_spec(&notation);
+        let notation_used = p.notation.as_deref().map_or(false, |n| n.to_ascii_lowercase().contains('d'));
+        if let Some(ref notation) = p.notation {
+            let (c, s, m) = dice::parse_spec(notation);
             if let Some(c) = c { count = c; }
             if let Some(s) = s { sides = s; }
             if let Some(m) = m { modifier = m; }
@@ -74,7 +75,7 @@ impl TryluckServer {
         if let Some(s) = p.sides { sides = s; }
         if let Some(m) = p.modifier { modifier = m; }
 
-        let show_total = p.sum.unwrap_or(false) || modifier != 0;
+        let show_total = p.sum.unwrap_or(false) || modifier != 0 || notation_used;
         let rolls: Vec<u32> = (0..count).map(|_| rand::rng().random_range(1..=sides)).collect();
         let total: i64 = rolls.iter().map(|&r| r as i64).sum::<i64>() + modifier as i64;
 
